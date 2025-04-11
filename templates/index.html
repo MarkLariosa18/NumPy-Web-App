@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumPy Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Python NUMPY</h1>
+        </header>
+        <div class="activity">
+            <h2>Activity 2: Array Properties</h2>
+            <p>Displays basic properties of a NumPy array.</p>
+            <div class="form-group">
+                <label>Enter array (e.g., 1,2,3,4,5):</label>
+                <input type="text" id="input-2" placeholder="Comma-separated numbers">
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('activity2', false)">Analyze</button>
+                <button class="example" onclick="runActivity('activity2', true)">Try Example</button>
+            </div>
+            <div id="result-2" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Activity 3: Random Array Operations</h2>
+            <p>Performs operations on a random 5x5 array.</p>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('activity3', false)">Generate</button>
+                <button class="example" onclick="runActivity('activity3', true)">Try Example</button>
+            </div>
+            <div id="result-3" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Activity 4: Array Slicing</h2>
+            <p>Demonstrates various slicing techniques on a 4x5 array.</p>
+            <div class="form-group">
+                <label>Enter 4x5 array (e.g., 0,1,2,3,4;5,6,...):</label>
+                <textarea id="input-4" placeholder="Semicolon-separated rows"></textarea>
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('activity4', false)">Slice</button>
+                <button class="example" onclick="runActivity('activity4', true)">Try Example</button>
+            </div>
+            <div id="result-4" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Activity 5: Array Normalization</h2>
+            <p>Normalizes array values to range [0,1].</p>
+            <div class="form-group">
+                <label>Enter array (e.g., 10,20,30,40,50):</label>
+                <input type="text" id="input-5" placeholder="Comma-separated numbers">
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('activity5', false)">Normalize</button>
+                <button class="example" onclick="runActivity('activity5', true)">Try Example</button>
+            </div>
+            <div id="result-5" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Activity 6: Matrix Multiplication</h2>
+            <p>Multiplies two matrices with dimension checking.</p>
+            <div class="form-group">
+                <label>First matrix (e.g., 1,2;3,4):</label>
+                <textarea id="input-6a" placeholder="Semicolon-separated rows"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Second matrix (e.g., 5,6;7,8):</label>
+                <textarea id="input-6b" placeholder="Semicolon-separated rows"></textarea>
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('activity6', false)">Multiply</button>
+                <button class="example" onclick="runActivity('activity6', true)">Try Example</button>
+            </div>
+            <div id="result-6" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Activity 7: Math Operations</h2>
+            <p>Applies mathematical functions to an array.</p>
+            <div class="form-group">
+                <label>Enter array (e.g., 0.1,0.2,...,1.0):</label>
+                <input type="text" id="input-7" placeholder="Comma-separated numbers">
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('activity7', false)">Calculate</button>
+                <button class="example" onclick="runActivity('activity7', true)">Try Example</button>
+            </div>
+            <div id="result-7" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Activity 8: Custom Functions</h2>
+            <p>Computes statistics and transformations on a matrix.</p>
+            <div class="form-group">
+                <label>Enter 3x3 array (e.g., 1,2,3;4,5,6;7,8,9):</label>
+                <textarea id="input-8" placeholder="Semicolon-separated rows"></textarea>
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('activity8', false)">Calculate</button>
+                <button class="example" onclick="runActivity('activity8', true)">Try Example</button>
+            </div>
+            <div id="result-8" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Exam 1 (11-15): Second Largest Number</h2>
+            <p>Finds the second largest number in a list efficiently.</p>
+            <div class="form-group">
+                <label>Enter numbers (e.g., 10,5,8,20,15):</label>
+                <input type="text" id="input-exam1" placeholder="Comma-separated numbers">
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('exam1', false)">Calculate</button>
+                <button class="example" onclick="runActivity('exam1', true)">Try Example</button>
+            </div>
+            <div id="result-exam1" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Exam 2 (16-25): Most Frequent Element</h2>
+            <p>Identifies the most frequent element in a list.</p>
+            <div class="form-group">
+                <label>Enter numbers (e.g., 1,3,3,2,1,3,4):</label>
+                <input type="text" id="input-exam2" placeholder="Comma-separated numbers">
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('exam2', false)">Calculate</button>
+                <button class="example" onclick="runActivity('exam2', true)">Try Example</button>
+            </div>
+            <div id="result-exam2" class="result"></div>
+        </div>
+
+        <div class="activity">
+            <h2>Exam 3 (26-50): Temperature Analysis</h2>
+            <p>Analyzes temperature data with conversions and statistics.</p>
+            <div class="form-group">
+                <label>Enter temperatures (e.g., 20,22,19,...):</label>
+                <input type="text" id="input-exam3" placeholder="Comma-separated numbers">
+            </div>
+            <div class="button-group">
+                <button class="run" onclick="runActivity('exam3', false)">Analyze</button>
+                <button class="example" onclick="runActivity('exam3', true)">Try Example</button>
+            </div>
+            <div id="result-exam3" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        async function runActivity(activity, example) {
+            const isActivity = activity.startsWith('activity');
+            const idNum = isActivity ? activity.replace('activity', '') : activity;
+            const resultDiv = document.getElementById(`result-${idNum}`);
+            resultDiv.innerHTML = 'Processing...';
+            
+            let data = { example };
+            if (!example && idNum !== '3') {
+                if (idNum === '6') {
+                    data.input1 = document.getElementById('input-6a').value;
+                    data.input2 = document.getElementById('input-6b').value;
+                } else {
+                    data.input = document.getElementById(`input-${idNum}`).value;
+                }
+            }
+
+            try {
+                const response = await fetch(`/${activity}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    let formattedResult = '<strong>Result:</strong><div class="section">';
+                    const formatObject = (obj, indent = '') => {
+                        let html = '';
+                        for (const [key, value] of Object.entries(obj)) {
+                            if (Array.isArray(value)) {
+                                if (value.length && Array.isArray(value[0])) {
+                                    html += `${indent}<span class="section-title">${key}:</span><div class="matrix">${value.map(row => `[${row.join(', ')}]`).join('<br>')}</div>`;
+                                } else {
+                                    html += `${indent}<span class="section-title">${key}:</span><span class="array">[${value.join(', ')}]</span><br>`;
+                                }
+                            } else if (typeof value === 'object' && value !== null) {
+                                html += `${indent}<span class="section-title">${key}:</span><div class="stats">${formatObject(value, indent + '  ')}</div>`;
+                            } else {
+                                html += `${indent}<span class="key-value"><span class="key">${key}:</span>${value}</span><br>`;
+                            }
+                        }
+                        return html;
+                    };
+                    formattedResult += formatObject(result.result) + '</div>';
+                    resultDiv.innerHTML = formattedResult;
+                } else {
+                    resultDiv.innerHTML = `<span class="error">Error: ${result.error}</span>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">Network Error: ${error.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>

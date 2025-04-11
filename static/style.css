@@ -1,0 +1,206 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --success: #27ae60;
+    --error: #e74c3c;
+    --background: #ecf0f1;
+    --card-bg: #ffffff;
+    --highlight: #f1c40f;
+    --text-muted: #7f8c8d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.activity {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.activity:hover {
+    transform: translateY(-5px);
+}
+
+.activity h2 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+.activity p {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    opacity: 0.95;
+}
+
+button.run {
+    background: var(--secondary);
+    color: white;
+}
+
+button.example {
+    background: var(--success);
+    color: white;
+}
+
+/* Updated Result Styles */
+.result {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: var(--primary);
+    border-left: 4px solid var(--secondary);
+}
+
+.result strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.result .section {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--text-muted);
+}
+
+.result .section-title {
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.result .array {
+    color: #16a085;
+    background: #e8f6f3;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.2rem 0;
+}
+
+.result .matrix {
+    display: block;
+    background: #fef5e7;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin: 0.2rem 0;
+    color: #d35400;
+}
+
+.result .stats {
+    background: #f4ecf7;
+    padding: 0.5rem;
+    border-radius: 4px;
+    color: #8e44ad;
+}
+
+.result .key-value {
+    display: block;
+    margin: 0.2rem 0;
+}
+
+.result .key {
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.result .error {
+    color: var(--error);
+    font-weight: 600;
+    background: #f9ebeb;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
