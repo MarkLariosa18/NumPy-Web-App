@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify, render_template
 import numpy as np
 import math
+import threading
+import time
+import requests
 
 app = Flask(__name__)
 
@@ -15,11 +18,11 @@ def validate_numeric_input(input_str, min_length=1):
             try:
                 val = int(x)
                 if float(x) == val:
-                    result.append(val)  
+                    result.append(val)
                 else:
-                    result.append(float(x))  
+                    result.append(float(x))
             except ValueError:
-                result.append(float(x)) 
+                result.append(float(x))
         return result
     except ValueError:
         raise ValueError("All inputs must be numeric")
@@ -116,55 +119,34 @@ def exam3():
 
 @app.route('/activity2', methods=['POST'])
 def activity2():
-    """
-    Displays basic array properties:
-    - Shape
-    - Data type
-    - Size
-    """
+    """Displays basic array properties"""
     try:
         data = request.json
         if data.get('example'):
-            array = np.array([1, 2, 3, 4, 5])  # Hardcoded: int64
+            array = np.array([1, 2, 3, 4, 5])
         else:
-            array = np.array(validate_numeric_input(data.get('input', '')))  # Now matches int64 for integer inputs
-        
+            array = np.array(validate_numeric_input(data.get('input', '')))
         result = {
             'array': array.tolist(),
             'shape': str(array[np.newaxis, :].shape),
             'dtype': str(array.dtype),
             'size': int(array.size)
         }
-
         return jsonify({'success': True, 'result': result})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/activity3', methods=['POST'])
 def activity3():
-    """
-    Generates a 5x5 random array and demonstrates operations:
-    - Statistical calculations (mean, median, std)
-    - Element-wise operations
-    - Array reshaping
-    No user input required - always generates a new random 5x5 array
-    """
+    """Generates a 5x5 random array and demonstrates operations"""
     try:
-        # Generate a 5x5 array with random integers between 0 and 100
         arr = np.random.randint(0, 100, size=(5, 5))
-
-        # Statistical calculations
         mean_val = float(np.mean(arr))
         median_val = float(np.median(arr))
         std_val = float(np.std(arr))
-
-        # Element-wise operations with another array
         arr2 = np.ones_like(arr) * 2
         multiplication = arr * arr2
-
-        # Reshaping
         reshaped_25x1 = arr.reshape(25, 1)
-
         result = {
             'original_array': arr.tolist(),
             'stats': {
@@ -181,12 +163,7 @@ def activity3():
 
 @app.route('/activity4', methods=['POST'])
 def activity4():
-    """
-    Demonstrates array slicing and indexing operations:
-    - Row and column extraction
-    - Submatrix selection
-    - Step slicing
-    """
+    """Demonstrates array slicing and indexing operations"""
     try:
         data = request.json
         if data.get('example'):
@@ -198,7 +175,6 @@ def activity4():
             arr = validate_matrix_input(data.get('input', ''))
             if arr.shape != (4, 5):
                 raise ValueError("Input must be a 4x5 matrix")
-
         result = {
             'original_array': arr.tolist(),
             'first_row': arr[0, :].tolist(),
@@ -213,23 +189,18 @@ def activity4():
 
 @app.route('/activity5', methods=['POST'])
 def activity5():
-    """
-    Normalizes an input array to values between 0 and 1 using min-max normalization
-    """
+    """Normalizes an input array to values between 0 and 1"""
     try:
         data = request.json
         if data.get('example'):
             arr = np.array([2, 5, 8, 1, 3, 9, 4, 7, 6])
         else:
             arr = np.array(validate_numeric_input(data.get('input', '')))
-        
-        # Normalize array
         arr_min, arr_max = arr.min(), arr.max()
         if arr_max == arr_min:
             normalized = np.zeros_like(arr, dtype=float)
         else:
             normalized = (arr - arr_min) / (arr_max - arr_min)
-
         result = {
             'original_array': arr.tolist(),
             'normalized': normalized.tolist(),
@@ -242,10 +213,7 @@ def activity5():
 
 @app.route('/activity6', methods=['POST'])
 def activity6():
-    """
-    Performs matrix multiplication with dimension checking
-    Requires two matrix inputs
-    """
+    """Performs matrix multiplication with dimension checking"""
     try:
         data = request.json
         if data.get('example'):
@@ -254,13 +222,11 @@ def activity6():
         else:
             arr1 = validate_matrix_input(data.get('input1', ''))
             arr2 = validate_matrix_input(data.get('input2', ''))
-        
         if arr1.shape[1] != arr2.shape[0]:
             raise ValueError(
                 f"Cannot multiply matrices: incompatible dimensions "
                 f"{arr1.shape} and {arr2.shape}"
             )
-
         result = {
             'matrix1': arr1.tolist(),
             'matrix2': arr2.tolist(),
@@ -272,12 +238,7 @@ def activity6():
 
 @app.route('/activity7', methods=['POST'])
 def activity7():
-    """
-    Applies mathematical operations to an array:
-    - Square root
-    - Natural logarithm
-    - Exponential
-    """
+    """Applies mathematical operations to an array"""
     try:
         data = request.json
         if data.get('example'):
@@ -287,7 +248,6 @@ def activity7():
             arr = np.array(validate_numeric_input(data.get('input', '')))
             if np.any(arr < 0):
                 raise ValueError("All numbers must be non-negative")
-
         result = {
             'original_array': arr.tolist(),
             'sqrt': np.round(np.sqrt(arr), 3).tolist(),
@@ -300,18 +260,13 @@ def activity7():
 
 @app.route('/activity8', methods=['POST'])
 def activity8():
-    """
-    Calculates statistics and applies transformations:
-    - Statistical measures
-    - Square, sqrt, and cube transformations
-    """
+    """Calculates statistics and applies transformations"""
     try:
         data = request.json
         if data.get('example'):
             arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
         else:
             arr = validate_matrix_input(data.get('input', ''))
-
         result = {
             'original_array': arr.tolist(),
             'stats': {
@@ -330,7 +285,24 @@ def activity8():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
+# Self-pinging function to prevent spin-down
+def keep_alive():
+    """Sends periodic GET requests to the app's root URL to keep it active"""
+    # Wait until the app is fully started and deployed
+    time.sleep(60)  # Initial delay to allow Render to assign the URL
+    while True:
+        try:
+            # Use the Render-provided URL environment variable if available
+            app_url = os.environ.get('RENDER_EXTERNAL_URL', 'http://localhost:5000')
+            response = requests.get(app_url)
+            print(f"Self-ping to {app_url}: {response.status_code}")
+        except Exception as e:
+            print(f"Self-ping failed: {str(e)}")
+        time.sleep(300)  # Ping every 5 minutes (300 seconds)
+
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5000))
+    # Start the self-pinging thread
+    threading.Thread(target=keep_alive, daemon=True).start()
     app.run(host='0.0.0.0', port=port, debug=False)
